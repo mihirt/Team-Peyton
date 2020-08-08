@@ -1,4 +1,30 @@
 from playsound import playsound
+import os
+audio_path = "audio_files"
 
-playsound("sound_samples/drum_cymbal_open.wav")
+def say_play():
+    playsound(audio_path+"Play.wav")
+
+def say_pause():
+    playsound(audio_path+"Pause.wav")
+
+def say_skip():
+    playsound(audio_path+"Skip.wav")
+
+def say_help():
+    playsound(audio_path+"Help.wav")
+
+def say_hungry():
+    playsound(audio_path+"Hungry.wav")
+
+def say_thirsty():
+    playsound(audio_path+"Thirsty.wav")
+
+
+say_play()
+say_pause()
+say_skip()
+say_help()
+say_hungry()
+say_thirsty()
 print("done")
