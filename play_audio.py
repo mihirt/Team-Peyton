@@ -25,12 +25,3 @@ def say_hungry():
 def say_thirsty():
     player = OMXPlayer(audio_path+"/Thirsty.mp3")
     player.play()
-
-
-say_play()
-say_pause()
-say_skip()
-say_help()
-say_hungry()
-say_thirsty()
-print("done")
