@@ -27,6 +27,7 @@ def signal_handler(sig, frame):
 
 
 def play(channel):
+    print(player_iface.Status())
     player_iface.Play()
     return True
 
