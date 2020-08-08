@@ -65,6 +65,7 @@ def on_playback_control(fd, condition):
 
 
 if __name__ == '__main__':
+    GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
     GPIO.setup([BUTTON_GPIO, B2], GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(BUTTON_GPIO,
