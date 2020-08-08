@@ -6,6 +6,7 @@ import signal
 import sys
 import RPi.GPIO as GPIO
 BUTTON_GPIO = 16
+B2 = 12
 
 
 def on_property_changed(interface, changed, invalidated):
@@ -26,13 +27,18 @@ def signal_handler(sig, frame):
     sys.exit(0)
 
 
-def PlayPause(channel):
+def playPause(channel):
     pp = play_prop.GetAll("org.bluez.MediaPlayer1")
     status = pp['Status']
     if "play" in status:
         player_iface.Pause()
     else:
         player_iface.Play()
+    return True
+
+
+def next(channel):
+    player_iface.Next()
     return True
 
 
@@ -62,9 +68,11 @@ if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(BUTTON_GPIO,
-                          GPIO.FALLING,
-                          callback=PlayPause,
+                          GPIO.RISING,
+                          callback=playPause,
                           bouncetime=100)
+    GPIO.setup(B2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=100)
 
     # signal.signal(signal.SIGINT, signal_handler)
 
