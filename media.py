@@ -28,6 +28,7 @@ def signal_handler(sig, frame):
 
 
 def playPause(channel):
+    print("16 called!")
     pp = play_prop.GetAll("org.bluez.MediaPlayer1")
     status = pp['Status']
     if "play" in status:
@@ -38,6 +39,7 @@ def playPause(channel):
 
 
 def next(channel):
+    print("12 called!")
     player_iface.Next()
     return True
 
