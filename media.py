@@ -1,6 +1,10 @@
+#!/usr/bin/env python3
 import dbus, dbus.mainloop.glib, sys
 from gi.repository import GLib
 import threading
+import signal
+import sys
+import RPi.GPIO as GPIO
 
 
 def on_property_changed(interface, changed, invalidated):
@@ -14,6 +18,16 @@ def on_property_changed(interface, changed, invalidated):
             print('Music Info:')
             for key in ('Title', 'Artist', 'Album'):
                 print('   {}: {}'.format(key, value.get(key, '')))
+
+
+def signal_handler(sig, frame):
+    GPIO.cleanup()
+    sys.exit(0)
+
+
+def play(channel):
+    player_iface.Play()
+    return True
 
 
 def on_playback_control(fd, condition):
@@ -39,6 +53,15 @@ def on_playback_control(fd, condition):
 
 
 if __name__ == '__main__':
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.add_event_detect(BUTTON_GPIO,
+                          GPIO.FALLING,
+                          callback=play,
+                          bouncetime=100)
+
+    # signal.signal(signal.SIGINT, signal_handler)
+
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     bus = dbus.SystemBus()
     obj = bus.get_object('org.bluez', "/")
@@ -60,9 +83,9 @@ if __name__ == '__main__':
                             bus_name='org.bluez',
                             signal_name='PropertiesChanged',
                             dbus_interface='org.freedesktop.DBus.Properties')
-    GLib.io_add_watch(sys.stdin, GLib.IO_IN, on_playback_control)
+    # GLib.io_add_watch(sys.stdin, GLib.IO_IN, on_playback_control)
     glib_thread = threading.Thread(target=GLib.MainLoop().run())
     glib_thread.daemon = True
     glib_thread.start()
-
     print("suppity")
+    signal.pause()
