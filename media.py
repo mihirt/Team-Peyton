@@ -70,10 +70,14 @@ if __name__ == '__main__':
     mgr = dbus.Interface(obj, 'org.freedesktop.DBus.ObjectManager')
     player_iface = None
     transport_prop_iface = None
+    player_prop = None
     for path, ifaces in mgr.GetManagedObjects().items():
         if 'org.bluez.MediaPlayer1' in ifaces:
             player_iface = dbus.Interface(bus.get_object('org.bluez', path),
                                           'org.bluez.MediaPlayer1')
+            play_prop = dbus.Interface(bus.get_object('org.bluez', path),
+                                       'org.freedesktop.DBus.Properties')
+            print(play_prop.GetAll("org.bluez.MediaPlayer1"))
         elif 'org.bluez.MediaTransport1' in ifaces:
             transport_prop_iface = dbus.Interface(
                 bus.get_object('org.bluez', path),
