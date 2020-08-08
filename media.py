@@ -61,7 +61,7 @@ if __name__ == '__main__':
                           callback=play,
                           bouncetime=100)
 
-    signal.signal(signal.SIGINT, signal_handler)
+    # signal.signal(signal.SIGINT, signal_handler)
 
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     bus = dbus.SystemBus()
