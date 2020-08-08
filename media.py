@@ -37,14 +37,17 @@ def playPause(channel):
     status = pp['Status']
     if "play" in status:
         player_iface.Pause()
+        play_audio.say_pause()
     else:
         player_iface.Play()
+        play_audio.say_play()
     return True
 
 
 def next(channel):
     print("12 called!")
     player_iface.Next()
+    play_audio.say_skip()
     return True
 
 
@@ -86,8 +89,14 @@ if __name__ == '__main__':
                           GPIO.RISING,
                           callback=play_audio.say_help,
                           bouncetime=100)
-    # GPIO.add_event_detect(B4, GPIO.RISING, callback=next, bouncetime=100)
-    # GPIO.add_event_detect(B5, GPIO.RISING, callback=next, bouncetime=100)
+    GPIO.add_event_detect(B4,
+                          GPIO.RISING,
+                          callback=play_audio.say_hungry,
+                          bouncetime=100)
+    GPIO.add_event_detect(B5,
+                          GPIO.RISING,
+                          callback=play_audio.say_thirsty,
+                          bouncetime=100)
 
     signal.signal(signal.SIGINT, signal_handler)
 
