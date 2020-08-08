@@ -6,6 +6,7 @@ import signal
 import sys
 import RPi.GPIO as GPIO
 BUTTON_GPIO = 16
+B2 = 12
 
 
 def on_property_changed(interface, changed, invalidated):
@@ -26,9 +27,20 @@ def signal_handler(sig, frame):
     sys.exit(0)
 
 
-def play(channel):
-    print(player_iface.Status())
-    player_iface.Play()
+def playPause(channel):
+    print("16 called!")
+    pp = play_prop.GetAll("org.bluez.MediaPlayer1")
+    status = pp['Status']
+    if "play" in status:
+        player_iface.Pause()
+    else:
+        player_iface.Play()
+    return True
+
+
+def next(channel):
+    print("12 called!")
+    player_iface.Next()
     return True
 
 
@@ -55,14 +67,17 @@ def on_playback_control(fd, condition):
 
 
 if __name__ == '__main__':
+    GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup([BUTTON_GPIO, B2], GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.add_event_detect(BUTTON_GPIO,
-                          GPIO.FALLING,
-                          callback=play,
+                          GPIO.RISING,
+                          callback=playPause,
                           bouncetime=100)
 
-    # signal.signal(signal.SIGINT, signal_handler)
+    GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=100)
+
+    signal.signal(signal.SIGINT, signal_handler)
 
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     bus = dbus.SystemBus()
@@ -70,10 +85,13 @@ if __name__ == '__main__':
     mgr = dbus.Interface(obj, 'org.freedesktop.DBus.ObjectManager')
     player_iface = None
     transport_prop_iface = None
+    player_prop = None
     for path, ifaces in mgr.GetManagedObjects().items():
         if 'org.bluez.MediaPlayer1' in ifaces:
             player_iface = dbus.Interface(bus.get_object('org.bluez', path),
                                           'org.bluez.MediaPlayer1')
+            play_prop = dbus.Interface(bus.get_object('org.bluez', path),
+                                       'org.freedesktop.DBus.Properties')
         elif 'org.bluez.MediaTransport1' in ifaces:
             transport_prop_iface = dbus.Interface(
                 bus.get_object('org.bluez', path),
