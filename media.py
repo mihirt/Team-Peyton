@@ -7,6 +7,10 @@ import sys
 import RPi.GPIO as GPIO
 BUTTON_GPIO = 16
 B2 = 12
+B3 = 25
+B4 = 24
+B5 = 23
+import play_audio
 
 
 def on_property_changed(interface, changed, invalidated):
@@ -76,6 +80,12 @@ if __name__ == '__main__':
                           bouncetime=100)
 
     GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=100)
+    GPIO.add_event_detect(B3,
+                          GPIO.RISING,
+                          callback=play_audio.say_help(),
+                          bouncetime=100)
+    # GPIO.add_event_detect(B4, GPIO.RISING, callback=next, bouncetime=100)
+    # GPIO.add_event_detect(B5, GPIO.RISING, callback=next, bouncetime=100)
 
     signal.signal(signal.SIGINT, signal_handler)
 
