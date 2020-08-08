@@ -28,8 +28,11 @@ def signal_handler(sig, frame):
 
 def PlayPause(channel):
     pp = play_prop.GetAll("org.bluez.MediaPlayer1")
-    print(pp['Status'])
-    player_iface.Play()
+    status = pp['Status']
+    if "play" in status:
+        player_iface.Pause()
+    else:
+        player_iface.Play()
     return True
 
 
