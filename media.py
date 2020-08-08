@@ -26,8 +26,9 @@ def signal_handler(sig, frame):
     sys.exit(0)
 
 
-def play(channel):
-    print(player_iface.Status())
+def PlayPause(channel):
+    pp = play_prop.GetAll("org.bluez.MediaPlayer1")
+    print(pp['Status'])
     player_iface.Play()
     return True
 
@@ -77,7 +78,6 @@ if __name__ == '__main__':
                                           'org.bluez.MediaPlayer1')
             play_prop = dbus.Interface(bus.get_object('org.bluez', path),
                                        'org.freedesktop.DBus.Properties')
-            print(play_prop.GetAll("org.bluez.MediaPlayer1"))
         elif 'org.bluez.MediaTransport1' in ifaces:
             transport_prop_iface = dbus.Interface(
                 bus.get_object('org.bluez', path),
