@@ -5,7 +5,6 @@ def say_play():
     player = OMXPlayer(audio_path+"/Play.mp3")
     player.play()
 
-
 def say_pause():
     player = OMXPlayer(audio_path+"/Pause.mp3")
     player.play()
@@ -25,3 +24,6 @@ def say_hungry():
 def say_thirsty():
     player = OMXPlayer(audio_path+"/Thirsty.mp3")
     player.play()
+
+if __name__ == '__main__':
+    say_play()
