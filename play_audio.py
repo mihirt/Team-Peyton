@@ -5,6 +5,7 @@ def say_play():
     player = OMXPlayer(audio_path+"/Play.mp3")
     player.play()
 
+
 def say_pause():
     player = OMXPlayer(audio_path+"/Pause.mp3")
     player.play()
