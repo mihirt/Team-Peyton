@@ -82,7 +82,7 @@ if __name__ == '__main__':
     GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=100)
     GPIO.add_event_detect(B3,
                           GPIO.RISING,
-                          callback=play_audio.say_help(),
+                          callback=play_audio.say_help,
                           bouncetime=100)
     # GPIO.add_event_detect(B4, GPIO.RISING, callback=next, bouncetime=100)
     # GPIO.add_event_detect(B5, GPIO.RISING, callback=next, bouncetime=100)
