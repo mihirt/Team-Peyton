@@ -108,6 +108,7 @@ if __name__ == '__main__':
     transport_prop_iface = None
     player_prop = None
     for path, ifaces in mgr.GetManagedObjects().items():
+        print(ifaces)
         if 'org.bluez.MediaPlayer1' in ifaces:
             player_iface = dbus.Interface(bus.get_object('org.bluez', path),
                                           'org.bluez.MediaPlayer1')
