@@ -82,21 +82,21 @@ if __name__ == '__main__':
     GPIO.add_event_detect(BUTTON_GPIO,
                           GPIO.RISING,
                           callback=playPause,
-                          bouncetime=500)
+                          bouncetime=200)
 
-    GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=500)
+    GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=200)
     GPIO.add_event_detect(B3,
                           GPIO.RISING,
                           callback=play_audio.say_help,
-                          bouncetime=500)
+                          bouncetime=200)
     GPIO.add_event_detect(B4,
                           GPIO.RISING,
                           callback=play_audio.say_hungry,
-                          bouncetime=500)
+                          bouncetime=200)
     GPIO.add_event_detect(B5,
                           GPIO.RISING,
                           callback=play_audio.say_thirsty,
-                          bouncetime=500)
+                          bouncetime=200)
 
     signal.signal(signal.SIGINT, signal_handler)
 
