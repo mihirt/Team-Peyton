@@ -5,11 +5,14 @@ import threading
 import signal
 import sys
 import RPi.GPIO as GPIO
-BUTTON_GPIO = 16
+B1 = 22
 B2 = 12
 B3 = 25
 B4 = 24
 B5 = 23
+B6 = 13
+B7 = 9
+B8 = 5
 import play_audio_pygame as play_audio
 #minor edit test
 
@@ -76,7 +79,7 @@ def on_playback_control(fd, condition):
 if __name__ == '__main__':
     GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup([BUTTON_GPIO, B2, B3, B4, B5],
+    GPIO.setup([B1, B2, B3, B4, B5, B6, B7],
                GPIO.IN,
                pull_up_down=GPIO.PUD_UP)
     # GPIO.add_event_detect(BUTTON_GPIO,
@@ -85,17 +88,29 @@ if __name__ == '__main__':
     #                       bouncetime=500)
     #
     # GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=500)
+    GPIO.add_event_detect(B1,
+                          GPIO.RISING,
+                          callback=play_audio.B1,
+                          bouncetime=500)
+    GPIO.add_event_detect(B2,
+                          GPIO.RISING,
+                          callback=play_audio.B2,
+                          bouncetime=500)
     GPIO.add_event_detect(B3,
                           GPIO.RISING,
-                          callback=play_audio.say_help,
+                          callback=play_audio.B3,
                           bouncetime=500)
     GPIO.add_event_detect(B4,
                           GPIO.RISING,
-                          callback=play_audio.say_hungry,
+                          callback=play_audio.B4,
                           bouncetime=500)
     GPIO.add_event_detect(B5,
                           GPIO.RISING,
-                          callback=play_audio.say_thirsty,
+                          callback=play_audio.B5,
+                          bouncetime=500)
+    GPIO.add_event_detect(B6,
+                          GPIO.RISING,
+                          callback=play_audio.B6,
                           bouncetime=500)
 
     signal.signal(signal.SIGINT, signal_handler)
