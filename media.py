@@ -10,7 +10,7 @@ B2 = 12
 B3 = 25
 B4 = 24
 B5 = 23
-import play_audio_pygame
+import play_audio_pygame as play_audio
 #minor edit test
 
 def on_property_changed(interface, changed, invalidated):
