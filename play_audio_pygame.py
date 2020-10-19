@@ -28,7 +28,7 @@ def B3(channel=None):
 
 
 def B4(channel=None):
-    file = audio_path + "/help.mp3"
+    file = audio_path + "/Help.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
@@ -44,28 +44,28 @@ def B5(channel=None):
 
 
 def B6(channel=None):
-    file = audio_path + "/hungry.mp3"
+    file = audio_path + "/Hungry.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(3)
 
 def B7a(channel=None):
-    file = audio_path + "/play.mp3"
+    file = audio_path + "/Play.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(3)
 
 def B7b(channel=None):
-    file = audio_path + "/pause.mp3"
+    file = audio_path + "/Pause.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(3)
 
 def B8(channel=None):
-    file = audio_path + "/skip.mp3"
+    file = audio_path + "/Skip.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
