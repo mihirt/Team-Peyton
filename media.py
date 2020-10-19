@@ -11,7 +11,7 @@ B3 = 25
 B4 = 24
 B5 = 23
 B6 = 13
-B7 = 9
+B7 = 6
 B8 = 5
 import play_audio_pygame as play_audio
 #minor edit test
