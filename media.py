@@ -79,7 +79,7 @@ def on_playback_control(fd, condition):
 if __name__ == '__main__':
     GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup([B1, B2, B3, B4, B5, B6, B7],
+    GPIO.setup([B1, B2, B3, B4, B5, B6, B7, B8],
                GPIO.IN,
                pull_up_down=GPIO.PUD_UP)
     # GPIO.add_event_detect(BUTTON_GPIO,
