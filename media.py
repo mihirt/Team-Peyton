@@ -112,7 +112,14 @@ if __name__ == '__main__':
                           GPIO.RISING,
                           callback=play_audio.B6,
                           bouncetime=500)
-
+    GPIO.add_event_detect(B7,
+                          GPIO.RISING,
+                          callback=play_audio.B7a,
+                          bouncetime=500)
+    GPIO.add_event_detect(B8,
+                          GPIO.RISING,
+                          callback=play_audio.B8,
+                          bouncetime=500)
     signal.signal(signal.SIGINT, signal_handler)
 
     # dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
