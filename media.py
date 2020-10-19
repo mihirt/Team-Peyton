@@ -10,7 +10,7 @@ B2 = 12
 B3 = 25
 B4 = 24
 B5 = 23
-import play_audio
+import play_audio_pygame
 #minor edit test
 
 def on_property_changed(interface, changed, invalidated):
@@ -79,12 +79,12 @@ if __name__ == '__main__':
     GPIO.setup([BUTTON_GPIO, B2, B3, B4, B5],
                GPIO.IN,
                pull_up_down=GPIO.PUD_UP)
-    GPIO.add_event_detect(BUTTON_GPIO,
-                          GPIO.RISING,
-                          callback=playPause,
-                          bouncetime=500)
-
-    GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=500)
+    # GPIO.add_event_detect(BUTTON_GPIO,
+    #                       GPIO.RISING,
+    #                       callback=playPause,
+    #                       bouncetime=500)
+    #
+    # GPIO.add_event_detect(B2, GPIO.RISING, callback=next, bouncetime=500)
     GPIO.add_event_detect(B3,
                           GPIO.RISING,
                           callback=play_audio.say_help,
@@ -100,34 +100,34 @@ if __name__ == '__main__':
 
     signal.signal(signal.SIGINT, signal_handler)
 
-    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-    bus = dbus.SystemBus()
-    obj = bus.get_object('org.bluez', "/")
-    mgr = dbus.Interface(obj, 'org.freedesktop.DBus.ObjectManager')
-    player_iface = None
-    transport_prop_iface = None
-    player_prop = None
-    for path, ifaces in mgr.GetManagedObjects().items():
-        print(ifaces)
-        if 'org.bluez.MediaPlayer1' in ifaces:
-            player_iface = dbus.Interface(bus.get_object('org.bluez', path),
-                                          'org.bluez.MediaPlayer1')
-            play_prop = dbus.Interface(bus.get_object('org.bluez', path),
-                                       'org.freedesktop.DBus.Properties')
-        elif 'org.bluez.MediaTransport1' in ifaces:
-            transport_prop_iface = dbus.Interface(
-                bus.get_object('org.bluez', path),
-                'org.freedesktop.DBus.Properties')
-    if not player_iface:
-        sys.exit('Error: Media Player not found.')
-
-    bus.add_signal_receiver(on_property_changed,
-                            bus_name='org.bluez',
-                            signal_name='PropertiesChanged',
-                            dbus_interface='org.freedesktop.DBus.Properties')
-    # GLib.io_add_watch(sys.stdin, GLib.IO_IN, on_playback_control)
-    glib_thread = threading.Thread(target=GLib.MainLoop().run())
-    glib_thread.daemon = True
-    glib_thread.start()
+    # dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+    # bus = dbus.SystemBus()
+    # obj = bus.get_object('org.bluez', "/")
+    # mgr = dbus.Interface(obj, 'org.freedesktop.DBus.ObjectManager')
+    # player_iface = None
+    # transport_prop_iface = None
+    # player_prop = None
+    # for path, ifaces in mgr.GetManagedObjects().items():
+    #     print(ifaces)
+    #     if 'org.bluez.MediaPlayer1' in ifaces:
+    #         player_iface = dbus.Interface(bus.get_object('org.bluez', path),
+    #                                       'org.bluez.MediaPlayer1')
+    #         play_prop = dbus.Interface(bus.get_object('org.bluez', path),
+    #                                    'org.freedesktop.DBus.Properties')
+    #     elif 'org.bluez.MediaTransport1' in ifaces:
+    #         transport_prop_iface = dbus.Interface(
+    #             bus.get_object('org.bluez', path),
+    #             'org.freedesktop.DBus.Properties')
+    # if not player_iface:
+    #     sys.exit('Error: Media Player not found.')
+    #
+    # bus.add_signal_receiver(on_property_changed,
+    #                         bus_name='org.bluez',
+    #                         signal_name='PropertiesChanged',
+    #                         dbus_interface='org.freedesktop.DBus.Properties')
+    # # GLib.io_add_watch(sys.stdin, GLib.IO_IN, on_playback_control)
+    # glib_thread = threading.Thread(target=GLib.MainLoop().run())
+    # glib_thread.daemon = True
+    # glib_thread.start()
     print("suppity")
     signal.pause()
