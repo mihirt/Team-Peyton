@@ -40,6 +40,7 @@ def B4(channel=None):
 
 
 def B5(channel=None):
+    print("clicked 5")
     file = audio_path + "/hug.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
@@ -48,6 +49,7 @@ def B5(channel=None):
 
 
 def B6(channel=None):
+    print("clicked 6")
     file = audio_path + "/Hungry.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
@@ -55,6 +57,7 @@ def B6(channel=None):
         pygame.time.Clock().tick(3)
 
 def B7a(channel=None):
+    print("clicked 7")
     file = audio_path + "/Play.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
@@ -69,6 +72,7 @@ def B7b(channel=None):
         pygame.time.Clock().tick(3)
 
 def B8(channel=None):
+    print("clicked 8")
     file = audio_path + "/Skip.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
