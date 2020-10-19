@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import dbus, dbus.mainloop.glib, sys
-from gi.repository import GLib
-import threading
+# import dbus, dbus.mainloop.glib, sys
+# from gi.repository import GLib
+# import threading
 import signal
 import sys
 import RPi.GPIO as GPIO
