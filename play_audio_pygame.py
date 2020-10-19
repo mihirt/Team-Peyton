@@ -4,6 +4,7 @@ pygame.init()
 pygame.mixer.init()
 
 def B1(channel=None):
+    print("clicked 1")
     file = audio_path + "/bathroom.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
@@ -12,6 +13,7 @@ def B1(channel=None):
 
 
 def B2(channel=None):
+    print("clicked 2")
     file = audio_path + "/drink.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
@@ -20,6 +22,7 @@ def B2(channel=None):
 
 
 def B3(channel=None):
+    print("clicked 3")
     file = audio_path + "/walk.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
@@ -28,6 +31,7 @@ def B3(channel=None):
 
 
 def B4(channel=None):
+    print("clicked 4")
     file = audio_path + "/Help.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
