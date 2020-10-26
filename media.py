@@ -151,5 +151,5 @@ if __name__ == '__main__':
     # glib_thread = threading.Thread(target=GLib.MainLoop().run())
     # glib_thread.daemon = True
     # glib_thread.start()
-    print("downloaded")
+    print("changed!")
     signal.pause()
