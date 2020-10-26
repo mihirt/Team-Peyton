@@ -50,7 +50,7 @@ def B5(channel=None):
 
 def B6(channel=None):
     print("clicked 6")
-    file = audio_path + "/Hungry.mp3"
+    file = audio_path + "/Play.mp3"
     pygame.mixer.music.load(file)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():

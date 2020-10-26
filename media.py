@@ -91,35 +91,35 @@ if __name__ == '__main__':
     GPIO.add_event_detect(B1,
                           GPIO.RISING,
                           callback=play_audio.B1,
-                          bouncetime=500)
+                          bouncetime=750)
     GPIO.add_event_detect(B2,
                           GPIO.RISING,
                           callback=play_audio.B2,
-                          bouncetime=500)
+                          bouncetime=750)
     GPIO.add_event_detect(B3,
                           GPIO.RISING,
                           callback=play_audio.B3,
-                          bouncetime=500)
+                          bouncetime=750)
     GPIO.add_event_detect(B4,
                           GPIO.RISING,
                           callback=play_audio.B4,
-                          bouncetime=500)
+                          bouncetime=750)
     GPIO.add_event_detect(B5,
                           GPIO.RISING,
                           callback=play_audio.B5,
-                          bouncetime=500)
+                          bouncetime=750)
     GPIO.add_event_detect(B6,
                           GPIO.RISING,
                           callback=play_audio.B6,
-                          bouncetime=500)
+                          bouncetime=750)
     GPIO.add_event_detect(B7,
                           GPIO.RISING,
                           callback=play_audio.B7a,
-                          bouncetime=500)
+                          bouncetime=750)
     GPIO.add_event_detect(B8,
                           GPIO.RISING,
                           callback=play_audio.B8,
-                          bouncetime=500)
+                          bouncetime=750)
     signal.signal(signal.SIGINT, signal_handler)
 
     # dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
