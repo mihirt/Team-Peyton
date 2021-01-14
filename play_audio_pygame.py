@@ -2,6 +2,7 @@ import pygame
 audio_path = "audio_files"
 pygame.init()
 pygame.mixer.init()
+pygame.mixer.music.set_volume(10.0)
 
 def B1(channel=None):
     print("clicked 1")
